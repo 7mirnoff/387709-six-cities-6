@@ -56,7 +56,6 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  'id': PropTypes.number.isRequired,
   'isFavorite': PropTypes.bool.isRequired,
   'isPremium': PropTypes.bool.isRequired,
   'image': PropTypes.string.isRequired,
