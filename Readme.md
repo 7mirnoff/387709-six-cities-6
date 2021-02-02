@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Смирнов](https://up.htmlacademy.ru/react/6/user/387709).
-* Наставник: `Неизвестно`.
+* Наставник: [Максим Кузнецов](https://up.htmlacademy.ru/react/6/user/619205).
 
 ---
 
