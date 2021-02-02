@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card';
 
 const CitiesScreen = (props) => {
-  const { hotels } = props;
+  const {hotels} = props;
 
   return (
     <>
@@ -113,6 +114,21 @@ const CitiesScreen = (props) => {
       </div>
     </>
   );
+};
+
+CitiesScreen.propTypes = {
+  hotels: PropTypes.arrayOf(
+      PropTypes.shape({
+        'id': PropTypes.number.isRequired,
+        'is_favorite': PropTypes.bool.isRequired,
+        'is_premium': PropTypes.bool.isRequired,
+        'preview_image': PropTypes.string.isRequired,
+        'price': PropTypes.number.isRequired,
+        'rating': PropTypes.number.isRequired,
+        'title': PropTypes.string.isRequired,
+        'type': PropTypes.string.isRequired
+      })
+  )
 };
 
 export default CitiesScreen;

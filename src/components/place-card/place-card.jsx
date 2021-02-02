@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const PlaceCard = (props) => {
-  const { title, image, price, type, rating, isPremium, isFavorite } = props;
+  const {title, image, price, type, rating, isPremium, isFavorite} = props;
 
   const IconPremium = () => {
     return (
@@ -17,7 +18,6 @@ const PlaceCard = (props) => {
     };
     return <span style={style} />;
   };
-
 
   return (
     <article className="cities__place-card place-card">
@@ -53,6 +53,17 @@ const PlaceCard = (props) => {
       </div>
     </article>
   );
+};
+
+PlaceCard.propTypes = {
+  'id': PropTypes.number.isRequired,
+  'isFavorite': PropTypes.bool.isRequired,
+  'isPremium': PropTypes.bool.isRequired,
+  'image': PropTypes.string.isRequired,
+  'price': PropTypes.number.isRequired,
+  'rating': PropTypes.number.isRequired,
+  'title': PropTypes.string.isRequired,
+  'type': PropTypes.string.isRequired
 };
 
 export default PlaceCard;
