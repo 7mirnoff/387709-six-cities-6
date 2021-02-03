@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CitiesScreen from '../cities-screen/cities-screen';
 
-const App = (props) => {
-  const {hotels} = props;
-
+const App = ({hotels}) => {
   return (
     <CitiesScreen
       hotels={hotels}

@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PlaceCard = (props) => {
-  const {title, image, price, type, rating, isPremium, isFavorite} = props;
+const IconPremium = () => {
+  return (
+    <div className="place-card__mark">
+      <span>Premium</span>
+    </div>
+  );
+};
 
-  const IconPremium = () => {
-    return (
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
-    );
-  };
+const PlaceCard = ({
+  title,
+  image,
+  price,
+  type,
+  rating,
+  isPremium,
+  isFavorite
+}) => {
 
   const StarsRating = () => {
     const style = {

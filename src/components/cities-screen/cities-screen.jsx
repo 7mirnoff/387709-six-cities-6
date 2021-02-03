@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card';
 
-const CitiesScreen = (props) => {
-  const {hotels} = props;
-
+const CitiesScreen = ({hotels}) => {
   return (
     <>
       <div style={{display: `none`}}>
