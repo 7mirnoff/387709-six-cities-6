@@ -1,28 +1,35 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import CitiesScreen from '../cities-screen/cities-screen';
-import LoginScreen from '../login-screen/login-screen';
-import FavoritesScreen from '../favorites-screen/favorites-screen';
-import RoomScreen from '../room-screen/room-screen';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
+import CitiesScreen from '../pages/cities-screen/cities-screen';
+import LoginScreen from '../pages/login-screen/login-screen';
+import FavoritesScreen from '../pages/favorites-screen/favorites-screen';
+import RoomScreen from '../pages/room-screen/room-screen';
+import NotFoundScreen from '../pages/not-found-screen/not-found-screen';
+
+const Routes = {
+  INDEX: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER: `/offer`
+};
 
 const App = ({hotels}) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={Routes.INDEX}>
           <CitiesScreen
             hotels={hotels}
           />
         </Route>
-        <Route exact path="/login">
+        <Route exact path={Routes.LOGIN}>
           <LoginScreen />
         </Route>
-        <Route exact path="/favorites">
+        <Route exact path={Routes.FAVORITES}>
           <FavoritesScreen />
         </Route>
-        <Route exact path="/offer/:id">
+        <Route exact path={Routes.OFFER}>
           <RoomScreen />
         </Route>
         <Route>
