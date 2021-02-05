@@ -11,7 +11,7 @@ const Routes = {
   INDEX: `/`,
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
-  OFFER: `/offer`
+  OFFER: `/offer/:id`
 };
 
 const App = ({hotels}) => {
