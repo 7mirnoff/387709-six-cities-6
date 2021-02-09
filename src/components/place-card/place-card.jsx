@@ -21,7 +21,7 @@ const PlaceCard = ({
 
   const StarsRating = () => {
     const style = {
-      width: `${Math.min(rating * 100 / 5, 100)}%`
+      width: `${Math.min(Math.round(rating) * 100 / 5, 100)}%`
     };
     return <span style={style} />;
   };
