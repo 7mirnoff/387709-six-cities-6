@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
 import PlacesList from '../../places-list/places-list';
+import {PropsValidator} from '../../../utils';
 
 const CitiesScreen = ({hotels}) => {
   return (
@@ -103,19 +103,6 @@ const CitiesScreen = ({hotels}) => {
   );
 };
 
-CitiesScreen.propTypes = {
-  hotels: PropTypes.arrayOf(
-      PropTypes.shape({
-        'id': PropTypes.number.isRequired,
-        'is_favorite': PropTypes.bool.isRequired,
-        'is_premium': PropTypes.bool.isRequired,
-        'preview_image': PropTypes.string.isRequired,
-        'price': PropTypes.number.isRequired,
-        'rating': PropTypes.number.isRequired,
-        'title': PropTypes.string.isRequired,
-        'type': PropTypes.string.isRequired
-      })
-  )
-};
+CitiesScreen.propTypes = PropsValidator.CITIES;
 
 export default CitiesScreen;

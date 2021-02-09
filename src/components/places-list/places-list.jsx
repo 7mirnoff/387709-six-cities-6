@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card';
+import {PropsValidator} from '../../utils';
 
 const PlacesList = ({hotels}) => {
   const [idActive, setIdActive] = useState(hotels[0].id);
@@ -23,6 +23,7 @@ const PlacesList = ({hotels}) => {
             type={hotel.type}
             isFavorite={hotel.is_favorite}
             isPremium={hotel.is_premium}
+            isActive={idActive === hotel.id}
             handleMouseEnter={handleMouseEnter}
           />)}
       </div>
@@ -30,19 +31,6 @@ const PlacesList = ({hotels}) => {
   );
 };
 
-PlacesList.propTypes = {
-  hotels: PropTypes.arrayOf(
-      PropTypes.shape({
-        'id': PropTypes.number.isRequired,
-        'is_favorite': PropTypes.bool.isRequired,
-        'is_premium': PropTypes.bool.isRequired,
-        'preview_image': PropTypes.string.isRequired,
-        'price': PropTypes.number.isRequired,
-        'rating': PropTypes.number.isRequired,
-        'title': PropTypes.string.isRequired,
-        'type': PropTypes.string.isRequired
-      })
-  )
-};
+PlacesList.propTypes = PropsValidator.CITIES;
 
 export default PlacesList;

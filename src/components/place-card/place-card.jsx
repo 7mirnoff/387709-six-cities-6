@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {PropsValidator} from '../../utils';
 
 const IconPremium = () => {
   return (
@@ -30,9 +31,11 @@ const PlaceCard = ({
   };
 
   return (
-    <article onMouseEnter={() => {
-      handleMouseEnter(id)
-    }} className="cities__place-card place-card">
+    <article
+      onMouseEnter={() => {
+        handleMouseEnter(id);
+      }}
+      className="cities__place-card place-card">
       {isPremium && <IconPremium />}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
@@ -68,15 +71,9 @@ const PlaceCard = ({
 };
 
 PlaceCard.propTypes = {
-  'id': PropTypes.number.isRequired,
-  'isFavorite': PropTypes.bool.isRequired,
-  'isPremium': PropTypes.bool.isRequired,
-  'image': PropTypes.string.isRequired,
-  'price': PropTypes.number.isRequired,
-  'rating': PropTypes.number.isRequired,
-  'title': PropTypes.string.isRequired,
-  'type': PropTypes.string.isRequired,
-  'handleMouseEnter': PropTypes.func.isRequired
+  ...PropsValidator.CITIES,
+  'handleMouseEnter': PropTypes.func.isRequired,
+  'isActive': PropTypes.bool.isRequired
 };
 
 export default React.memo(PlaceCard);
