@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const IconPremium = () => {
@@ -10,13 +11,15 @@ const IconPremium = () => {
 };
 
 const PlaceCard = ({
+  id,
   title,
   image,
   price,
   type,
   rating,
   isPremium,
-  isFavorite
+  isFavorite,
+  handleMouseEnter
 }) => {
 
   const StarsRating = () => {
@@ -27,7 +30,9 @@ const PlaceCard = ({
   };
 
   return (
-    <article className="cities__place-card place-card">
+    <article onMouseEnter={() => {
+      handleMouseEnter(id)
+    }} className="cities__place-card place-card">
       {isPremium && <IconPremium />}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
@@ -54,7 +59,7 @@ const PlaceCard = ({
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -63,13 +68,15 @@ const PlaceCard = ({
 };
 
 PlaceCard.propTypes = {
+  'id': PropTypes.number.isRequired,
   'isFavorite': PropTypes.bool.isRequired,
   'isPremium': PropTypes.bool.isRequired,
   'image': PropTypes.string.isRequired,
   'price': PropTypes.number.isRequired,
   'rating': PropTypes.number.isRequired,
   'title': PropTypes.string.isRequired,
-  'type': PropTypes.string.isRequired
+  'type': PropTypes.string.isRequired,
+  'handleMouseEnter': PropTypes.func.isRequired
 };
 
-export default PlaceCard;
+export default React.memo(PlaceCard);
