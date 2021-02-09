@@ -31,6 +31,8 @@ const PlacesList = ({hotels}) => {
   );
 };
 
-PlacesList.propTypes = PropsValidator.CITIES;
+PlacesList.propTypes = {
+  hotels: PropsValidator.HOTELS
+};
 
 export default PlacesList;

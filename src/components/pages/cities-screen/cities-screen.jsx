@@ -103,6 +103,8 @@ const CitiesScreen = ({hotels}) => {
   );
 };
 
-CitiesScreen.propTypes = PropsValidator.CITIES;
+CitiesScreen.propTypes = {
+  hotels: PropsValidator.HOTELS
+};
 
 export default CitiesScreen;

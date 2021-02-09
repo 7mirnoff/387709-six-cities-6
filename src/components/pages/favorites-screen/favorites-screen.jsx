@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {PropsValidator} from '../../../utils';
 
-const FavoritesScreen = () => {
+const FavoritesScreen = ({hotels}) => {
   return (
     <>
       <div style={{display: `none`}}>
@@ -162,6 +163,10 @@ const FavoritesScreen = () => {
       </div>
     </>
   );
+};
+
+FavoritesScreen.propTypes = {
+  hotels: PropsValidator.HOTELS
 };
 
 export default FavoritesScreen;

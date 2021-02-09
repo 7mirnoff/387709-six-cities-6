@@ -27,7 +27,9 @@ const App = ({hotels}) => {
           <LoginScreen />
         </Route>
         <Route exact path={Routes.FAVORITES}>
-          <FavoritesScreen />
+          <FavoritesScreen
+            hotels={hotels}
+          />
         </Route>
         <Route exact path={Routes.OFFER}>
           <RoomScreen />
@@ -40,6 +42,8 @@ const App = ({hotels}) => {
   );
 };
 
-App.propTypes = PropsValidator.CITIES;
+App.propTypes = {
+  hotels: PropsValidator.HOTELS
+};
 
 export default App;
