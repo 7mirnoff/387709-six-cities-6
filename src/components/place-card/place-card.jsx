@@ -11,6 +11,12 @@ const IconPremium = () => {
   );
 };
 
+const ClassesMap = {
+  offers: `cities__`,
+  favorites: `favorites__`,
+  other: `near-places__`
+};
+
 const PlaceCard = ({
   id,
   title,
@@ -20,7 +26,8 @@ const PlaceCard = ({
   rating,
   isPremium,
   isFavorite,
-  handleMouseEnter
+  handleMouseEnter,
+  pages,
 }) => {
 
   const StarsRating = () => {
@@ -35,14 +42,14 @@ const PlaceCard = ({
       onMouseEnter={() => {
         handleMouseEnter(id);
       }}
-      className="cities__place-card place-card">
+      className={`${ClassesMap[pages]}card place-card`}>
       {isPremium && <IconPremium />}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${ClassesMap[pages]}image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img className="place-card__image" src={image} width={260} height={200} alt="Place image" />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={`${ClassesMap[pages]}card-info place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{price} </b>
@@ -72,8 +79,9 @@ const PlaceCard = ({
 
 PlaceCard.propTypes = {
   ...PropsValidator.CITIES,
-  'handleMouseEnter': PropTypes.func.isRequired,
-  'isActive': PropTypes.bool.isRequired
+  'handleMouseEnter': PropTypes.func,
+  'isActive': PropTypes.bool,
+  'page': PropTypes.string.isRequired
 };
 
 export default React.memo(PlaceCard);
