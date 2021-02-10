@@ -24,7 +24,7 @@ const FavoritesItem = ({hotels}) => {
             type={hotel.type}
             isFavorite={hotel.is_favorite}
             isPremium={hotel.is_premium}
-            pages='favorites'
+            page='favorites'
           />)}
       </div>
     </li>
@@ -32,7 +32,7 @@ const FavoritesItem = ({hotels}) => {
 };
 
 FavoritesItem.propTypes = {
-  hotels: PropsValidator.CITIES
+  hotels: PropsValidator.HOTELS
 };
 
 export default FavoritesItem;

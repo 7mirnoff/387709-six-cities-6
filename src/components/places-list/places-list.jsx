@@ -25,7 +25,7 @@ const PlacesList = ({hotels}) => {
             isPremium={hotel.is_premium}
             isActive={idActive === hotel.id}
             handleMouseEnter={handleMouseEnter}
-            pages='offers'
+            page='offers'
           />)}
       </div>
     </>

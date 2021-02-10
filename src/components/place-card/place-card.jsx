@@ -27,7 +27,7 @@ const PlaceCard = ({
   isPremium,
   isFavorite,
   handleMouseEnter,
-  pages,
+  page,
 }) => {
 
   const StarsRating = () => {
@@ -42,14 +42,14 @@ const PlaceCard = ({
       onMouseEnter={() => {
         handleMouseEnter(id);
       }}
-      className={`${ClassesMap[pages]}card place-card`}>
+      className={`${ClassesMap[page]}card place-card`}>
       {isPremium && <IconPremium />}
-      <div className={`${ClassesMap[pages]}image-wrapper place-card__image-wrapper`}>
+      <div className={`${ClassesMap[page]}image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img className="place-card__image" src={image} width={260} height={200} alt="Place image" />
         </a>
       </div>
-      <div className={`${ClassesMap[pages]}card-info place-card__info`}>
+      <div className={`${ClassesMap[page]}card-info place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{price} </b>
