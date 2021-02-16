@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FeedbackForm = () => {
-  const [commentForm, setCommentForm] = React.useState({
+  const [comment, setComment] = React.useState({
     rating: ``,
     review: ``
   });
@@ -12,7 +12,7 @@ const FeedbackForm = () => {
 
   const handleFieldChange = (evt) => {
     const {name, value} = evt.target;
-    setCommentForm({...commentForm, [name]: value});
+    setComment({...comment, [name]: value});
   };
 
   return (
