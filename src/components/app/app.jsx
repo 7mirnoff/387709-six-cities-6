@@ -32,7 +32,9 @@ const App = ({hotels}) => {
           />
         </Route>
         <Route exact path={Routes.OFFER}>
-          <RoomScreen />
+          <RoomScreen
+            hotels={hotels}
+          />
         </Route>
         <Route>
           <NotFoundScreen />

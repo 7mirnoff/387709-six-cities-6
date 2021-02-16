@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import PlaceCard from '../place-card/place-card';
+import PlaceOffer from '../place-offer/place-offer';
 import {PropsValidator} from '../../utils';
 
 const PlacesList = ({hotels}) => {
@@ -13,7 +13,7 @@ const PlacesList = ({hotels}) => {
     <>
       <div className="cities__places-list places__list tabs__content">
         {hotels.map((hotel) =>
-          <PlaceCard
+          <PlaceOffer
             key={hotel.id}
             id={hotel.id}
             title={hotel.title}
@@ -24,8 +24,7 @@ const PlacesList = ({hotels}) => {
             isFavorite={hotel.is_favorite}
             isPremium={hotel.is_premium}
             isActive={idActive === hotel.id}
-            handleMouseEnter={handleMouseEnter}
-            page='offers'
+            onMouseEnter={handleMouseEnter}
           />)}
       </div>
     </>
