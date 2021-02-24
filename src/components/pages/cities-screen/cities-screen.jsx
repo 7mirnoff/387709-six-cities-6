@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PlacesList from '../../places-list/places-list';
+import Map from '../../map/map';
+
+import {city, points} from '../../../mocs/map';
 import {PropsValidator} from '../../../utils';
 
 const CitiesScreen = ({hotels}) => {
@@ -93,7 +96,10 @@ const CitiesScreen = ({hotels}) => {
                 <PlacesList hotels={hotels} />
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map" />
+                <Map
+                  city={city}
+                  points={points}
+                />
               </div>
             </div>
           </div>
