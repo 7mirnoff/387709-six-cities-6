@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PlaceFavorites from '../place-favorites/place-favorites';
 import {PropsValidator} from '../../utils';
 
@@ -34,4 +35,10 @@ FavoritesItem.propTypes = {
   hotels: PropsValidator.HOTELS
 };
 
-export default FavoritesItem;
+const mapStateToProps = (state) => {
+  return {
+    hotels: state.cities.offers
+  };
+};
+
+export default connect(mapStateToProps, null)(FavoritesItem);

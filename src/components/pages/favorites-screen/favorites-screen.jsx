@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import FavoritesItem from '../../favorites-item/favorites-item';
 import {PropsValidator} from '../../../utils';
 
-const FavoritesScreen = ({hotels}) => {
+const FavoritesScreen = () => {
   return (
     <>
       <div style={{display: `none`}}>
@@ -37,7 +37,7 @@ const FavoritesScreen = ({hotels}) => {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                <FavoritesItem hotels={hotels} />
+                <FavoritesItem />
               </ul>
             </section>
           </div>

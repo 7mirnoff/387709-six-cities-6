@@ -19,9 +19,7 @@ const App = ({hotels}) => {
     <BrowserRouter>
       <Switch>
         <Route exact path={Routes.INDEX}>
-          <CitiesScreen
-            hotels={hotels}
-          />
+          <CitiesScreen />
         </Route>
         <Route exact path={Routes.LOGIN}>
           <LoginScreen />
