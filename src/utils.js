@@ -1,5 +1,36 @@
 import PropTypes from 'prop-types';
 
+const CITIES = [{
+  title: `Paris`,
+  url: `paris`,
+  id: `1`
+},
+{
+  title: `Cologne`,
+  url: `cologne`,
+  id: `2`
+},
+{
+  title: `Brussels`,
+  url: `brussels`,
+  id: `3`
+},
+{
+  title: `Amsterdam`,
+  url: `amsterdam`,
+  id: `4`
+},
+{
+  title: `Hamburg`,
+  url: `hamburg`,
+  id: `5`
+},
+{
+  title: `Dusseldorf`,
+  url: `dusseldorf`,
+  id: `6`
+}];
+
 const PropsValidator = {
   HOTELS: PropTypes.arrayOf(
       PropTypes.shape({
@@ -15,4 +46,4 @@ const PropsValidator = {
   )
 };
 
-export {PropsValidator};
+export {CITIES, PropsValidator};
