@@ -1,10 +1,9 @@
 import {CitiesActionTypes} from './action';
 
-import {offers} from '../../mocs/offers';
-
 const initialState = {
   currentCity: `Paris`,
-  offers
+  offers: [],
+  isDataLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,7 +11,8 @@ const reducer = (state = initialState, action) => {
     case CitiesActionTypes.SET_CITIES_LIST:
       return {
         ...state,
-        offers: action.payload
+        offers: action.payload,
+        isDataLoaded: true
       };
     case CitiesActionTypes.SET_CURRENT_CITY:
       return {

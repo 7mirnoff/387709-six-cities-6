@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import FeedbackForm from '../../feedback-form/feedback-form';
 import PlaceOther from '../../place-other/place-other';
@@ -211,4 +212,10 @@ RoomScreen.propTypes = {
   hotels: PropsValidator.HOTELS
 };
 
-export default RoomScreen;
+const mapStateToProps = (state) => {
+  return {
+    hotels: state.cities.offers
+  };
+};
+
+export default connect(mapStateToProps, null)(RoomScreen);
