@@ -1,5 +1,10 @@
 import PropTypes from 'prop-types';
 
+const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 const CITIES = [{
   title: `Paris`,
   url: `paris`,
@@ -46,4 +51,4 @@ const PropsValidator = {
   )
 };
 
-export {CITIES, PropsValidator};
+export {CITIES, PropsValidator, AuthorizationStatus};
