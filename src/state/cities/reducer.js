@@ -1,10 +1,8 @@
 import {CitiesActionTypes} from './action';
 
-import {offers} from '../../mocs/offers';
-
 const initialState = {
   currentCity: `Paris`,
-  offers
+  offers: []
 };
 
 const reducer = (state = initialState, action) => {
