@@ -18,7 +18,7 @@ const Routes = {
   OFFER: `/offer/:id`
 };
 
-const App = ({hotels, isDataLoaded, onLoadData}) => {
+const App = ({isDataLoaded, onLoadData}) => {
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -43,14 +43,10 @@ const App = ({hotels, isDataLoaded, onLoadData}) => {
           <LoginScreen />
         </Route>
         <Route exact path={Routes.FAVORITES}>
-          <FavoritesScreen
-            hotels={hotels}
-          />
+          <FavoritesScreen />
         </Route>
         <Route exact path={Routes.OFFER}>
-          <RoomScreen
-            hotels={hotels}
-          />
+          <RoomScreen />
         </Route>
         <Route>
           <NotFoundScreen />
