@@ -10,6 +10,7 @@ import {rootReducer} from './state/root-reducer';
 import {createAPI} from "./services/api";
 import {AuthorizationActionCreator} from './state/authorization/action';
 import App from './components/app/app';
+import {checkAuth} from "./state/api-actions";
 import {AuthorizationStatus} from "./utils";
 
 const api = createAPI(
@@ -22,6 +23,8 @@ const store = createStore(
         applyMiddleware(thunk.withExtraArgument(api))
     )
 );
+
+store.dispatch(checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
