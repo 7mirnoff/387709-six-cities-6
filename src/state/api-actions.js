@@ -16,4 +16,5 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
     .then(() => dispatch(AuthorizationActionTypes.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(AuthorizationActionTypes.redirectToRoute(`/favorites`)))
 );

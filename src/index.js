@@ -11,6 +11,7 @@ import {createAPI} from "./services/api";
 import {AuthorizationActionCreator} from './state/authorization/action';
 import App from './components/app/app';
 import {checkAuth} from "./state/api-actions";
+import {redirect} from "./state/middlewares/redirect";
 import {AuthorizationStatus} from "./utils";
 
 const api = createAPI(
@@ -20,7 +21,8 @@ const api = createAPI(
 const store = createStore(
     rootReducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
 
