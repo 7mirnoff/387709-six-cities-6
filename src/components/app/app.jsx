@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import browserHistory from "../../browser-history";
 import CitiesScreen from '../pages/cities-screen/cities-screen';
 import LoginScreen from '../pages/login-screen/login-screen';
 import FavoritesScreen from '../pages/favorites-screen/favorites-screen';
@@ -34,7 +35,7 @@ const App = ({isDataLoaded, onLoadData}) => {
 
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={Routes.INDEX}>
           <CitiesScreen />
