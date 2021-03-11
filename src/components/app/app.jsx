@@ -11,14 +11,7 @@ import RoomScreen from '../pages/room-screen/room-screen';
 import NotFoundScreen from '../pages/not-found-screen/not-found-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchHotelsList} from "../../state/api-actions";
-import {PropsValidator} from '../../utils';
-
-const Routes = {
-  INDEX: `/`,
-  LOGIN: `/login`,
-  FAVORITES: `/favorites`,
-  OFFER: `/offer/:id`
-};
+import {PropsValidator, AppRoute} from '../../utils';
 
 const App = ({isDataLoaded, onLoadData}) => {
 
@@ -38,22 +31,22 @@ const App = ({isDataLoaded, onLoadData}) => {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path={Routes.INDEX}>
+        <Route exact path={AppRoute.INDEX}>
           <CitiesScreen />
         </Route>
-        <Route exact path={Routes.LOGIN}>
+        <Route exact path={AppRoute.LOGIN}>
           <LoginScreen />
         </Route>
         <PrivateRoute
           exact
-          path={Routes.FAVORITES}
+          path={AppRoute.FAVORITES}
           render={() => {
             return (
               <FavoritesScreen />
             );
           }}
         />
-        <Route exact path={Routes.OFFER}>
+        <Route exact path={AppRoute.OFFER}>
           <RoomScreen />
         </Route>
         <Route>
