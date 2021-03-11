@@ -51,4 +51,17 @@ const PropsValidator = {
   )
 };
 
-export {CITIES, PropsValidator, AuthorizationStatus};
+const AppRoute = {
+  INDEX: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER: `/offer/:id`
+};
+
+const APIRoute = {
+  HOTELS: `/hotels`,
+  LOGIN: `/login`,
+  LOGOUT: `/logout`
+};
+
+export {CITIES, PropsValidator, AuthorizationStatus, AppRoute, APIRoute};
