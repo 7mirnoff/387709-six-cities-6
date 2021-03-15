@@ -1,12 +1,44 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from '../../header/header';
 import FeedbackForm from '../../feedback-form/feedback-form';
 import PlaceOther from '../../place-other/place-other';
 
-import {PropsValidator} from '../../../utils';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import LoadingScreen from '../../loading-screen/loading-screen';
+
+import {PropsValidator, APIRouteMethods} from '../../../utils';
+
+import {createAPI} from "../../../services/api";
+
+const api = createAPI();
+const fetchNearbyList = (id) => {
+  return api.get(APIRouteMethods.getHotelNearby(id));
+};
 
 const RoomScreen = ({hotels}) => {
+  const id = +useParams().id;
+
+  const [isLoading, setLoading] = useState(true);
+  const [nearby, setNearby] = useState();
+  const currentOffer = hotels.filter((offer) => offer.id === id)[0];
+
+  useEffect(() => {
+    fetchNearbyList(id).then((data) => {
+      setNearby(data.data);
+      setLoading(false);
+    });
+  }, [currentOffer]);
+
+  if (!currentOffer) {
+    return <NotFoundScreen/>;
+  }
+
+  if (isLoading) {
+    return <LoadingScreen/>;
+  }
+
   return (
     <>
       <div style={{display: `none`}}>
@@ -166,7 +198,7 @@ const RoomScreen = ({hotels}) => {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                {hotels.slice(0, 3).map((hotel) =>
+                {nearby.slice(0, 3).map((hotel) =>
                   <PlaceOther
                     key={hotel.id}
                     id={hotel.id}

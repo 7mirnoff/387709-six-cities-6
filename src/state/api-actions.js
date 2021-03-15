@@ -29,8 +29,6 @@ export const logout = () => (dispatch, _getState, api) => (
     .then(() => dispatch(AuthorizationActionCreator.redirectToRoute(AppRoute.LOGIN)))
 );
 
-export const fetchNearbyList = ({id}) => (dispatch, _getState, api) => (
-  api.get(APIRouteMethods.getHotelsNearby(id))
-  .then(() => dispatch(AuthorizationActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-  .catch(() => {})
-);
+// export const fetchNearbyList = (id) => {
+//   return api.get(APIRouteMethods.getHotelNearby(id))
+// };
