@@ -2,8 +2,7 @@ import {CitiesActionTypes} from './action';
 
 const initialState = {
   currentCity: `Paris`,
-  offers: [],
-  isDataLoaded: false
+  offers: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,8 +10,7 @@ const reducer = (state = initialState, action) => {
     case CitiesActionTypes.SET_CITIES_LIST:
       return {
         ...state,
-        offers: action.payload,
-        isDataLoaded: true
+        offers: action.payload
       };
     case CitiesActionTypes.SET_CURRENT_CITY:
       return {

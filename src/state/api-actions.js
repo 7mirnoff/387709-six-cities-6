@@ -1,10 +1,14 @@
 import {AuthorizationActionCreator} from "./authorization/action";
 import {CitiesActionCreator} from "./cities/action";
-import {AuthorizationStatus, APIRoute, AppRoute} from "../utils";
+import {DataActionCreator} from "./data/action";
+import {AuthorizationStatus, APIRoute, AppRoute, APIRouteMethods} from "../utils";
 
 export const fetchHotelsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
-    .then(({data}) => dispatch(CitiesActionCreator.setCitiesList(data)))
+    .then(({data}) => {
+      dispatch(CitiesActionCreator.setCitiesList(data));
+      dispatch(DataActionCreator.setDataLoaded(true));
+    })
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
@@ -23,4 +27,10 @@ export const logout = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGOUT)
     .then(() => dispatch(AuthorizationActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)))
     .then(() => dispatch(AuthorizationActionCreator.redirectToRoute(AppRoute.LOGIN)))
+);
+
+export const fetchNearbyList = ({id}) => (dispatch, _getState, api) => (
+  api.get(APIRouteMethods.getHotelsNearby(id))
+  .then(() => dispatch(AuthorizationActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+  .catch(() => {})
 );

@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
 
-const AuthorizationStatus = {
+export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
 };
 
-const CITIES = [{
+export const FavoriteStatus = {
+  ON: 0.1,
+  OFF: 0,
+};
+
+export const CITIES = [{
   title: `Paris`,
   url: `paris`,
   id: `1`
@@ -36,7 +41,7 @@ const CITIES = [{
   id: `6`
 }];
 
-const PropsValidator = {
+export const PropsValidator = {
   HOTELS: PropTypes.arrayOf(
       PropTypes.shape({
         'id': PropTypes.number.isRequired,
@@ -51,17 +56,26 @@ const PropsValidator = {
   )
 };
 
-const AppRoute = {
+export const AppRoute = {
   INDEX: `/`,
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
   OFFER: `/offer/:id`
 };
 
-const APIRoute = {
+export const APIRoute = {
   HOTELS: `/hotels`,
   LOGIN: `/login`,
-  LOGOUT: `/logout`
+  LOGOUT: `/logout`,
+  FAVORITES: `/favorites`,
+  COMMENTS: `/comments`,
 };
 
-export {CITIES, PropsValidator, AuthorizationStatus, AppRoute, APIRoute};
+export const APIRouteMethods = {
+  getHotel: (id) => `${APIRoute.HOTELS}/${id}`,
+  getHotelNearby: (id) => `${APIRoute.HOTELS}/${id}/nearby`,
+  getHotelComments: (id) => `${APIRoute.COMMENTS}/${id}`,
+  setHotelComments: (id) => `${APIRoute.COMMENTS}/${id}`,
+  setFavoritesStatus: (id, isFavorite = FavoriteStatus.ON) => `${APIRoute.FAVORITES}/${id}/${isFavorite}`
+};
+
