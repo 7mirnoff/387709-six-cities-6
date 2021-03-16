@@ -2,11 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from '../../header/header';
+
+import ReviewsList from '../../reviews-list/reviews-list';
 import FeedbackForm from '../../feedback-form/feedback-form';
 import PlaceOther from '../../place-other/place-other';
 
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import LoadingScreen from '../../loading-screen/loading-screen';
+
+import StarsRating from '../../stars-rating/stars-rating';
 
 import {PropsValidator, APIRouteMethods} from '../../../utils';
 
@@ -17,17 +21,26 @@ const fetchNearbyList = (id) => {
   return api.get(APIRouteMethods.getHotelNearby(id));
 };
 
+const fetchCommentsList = (id) => {
+  return api.get(APIRouteMethods.getHotelComments(id));
+};
+
 const RoomScreen = ({hotels}) => {
   const id = +useParams().id;
 
   const [isLoading, setLoading] = useState(true);
   const [nearby, setNearby] = useState();
+  const [comments, setComments] = useState(null);
   const currentOffer = hotels.filter((offer) => offer.id === id)[0];
 
   useEffect(() => {
     fetchNearbyList(id).then((data) => {
       setNearby(data.data);
       setLoading(false);
+    });
+
+    fetchCommentsList(id).then((data) => {
+      setComments(data.data);
     });
   }, [currentOffer]);
 
@@ -50,36 +63,24 @@ const RoomScreen = ({hotels}) => {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/room.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/studio-01.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-                </div>
+                {currentOffer.images.slice(0, 6).map((img, idx) =>
+                  <div className="property__image-wrapper" key={idx}>
+                    <img className="property__image" src={img} alt="Photo studio" />
+                  </div>
+                )}
               </div>
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                <div className="property__mark">
-                  <span>Premium</span>
-                </div>
+                {currentOffer.is_premium ?
+                  <div className="property__mark">
+                    <span>Premium</span>
+                  </div> : null}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
-                    Beautiful &amp; luxurious studio at great location
+                    {currentOffer.title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button className={`${currentOffer.is_favorite ? `property__bookmark-button--active` : ``} property__bookmark-button button`} type="button">
                     <svg className="property__bookmark-icon" width={31} height={33}>
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
@@ -88,106 +89,54 @@ const RoomScreen = ({hotels}) => {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `80%`}} />
+                    <StarsRating rating={currentOffer.rating} />
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="property__rating-value rating__value">4.8</span>
+                  <span className="property__rating-value rating__value">{currentOffer.rating}</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                    Apartment
+                    {currentOffer.type ? currentOffer.type[0].toUpperCase() + currentOffer.type.slice(1) : null}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
-                    3 Bedrooms
+                    {currentOffer.bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                    Max 4 adults
+                    Max {currentOffer.max_adults} adults
                   </li>
                 </ul>
                 <div className="property__price">
-                  <b className="property__price-value">€120</b>
+                  <b className="property__price-value">€{currentOffer.price}</b>
                   <span className="property__price-text">&nbsp;night</span>
                 </div>
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    <li className="property__inside-item">
-                      Wi-Fi
-                    </li>
-                    <li className="property__inside-item">
-                      Washing machine
-                    </li>
-                    <li className="property__inside-item">
-                      Towels
-                    </li>
-                    <li className="property__inside-item">
-                      Heating
-                    </li>
-                    <li className="property__inside-item">
-                      Coffee machine
-                    </li>
-                    <li className="property__inside-item">
-                      Baby seat
-                    </li>
-                    <li className="property__inside-item">
-                      Kitchen
-                    </li>
-                    <li className="property__inside-item">
-                      Dishwasher
-                    </li>
-                    <li className="property__inside-item">
-                      Cabel TV
-                    </li>
-                    <li className="property__inside-item">
-                      Fridge
-                    </li>
+                    {currentOffer.goods.map((goods, idx) =>
+                      <li className="property__inside-item" key={idx}>
+                        {goods}
+                      </li>
+                    )}
                   </ul>
                 </div>
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width={74} height={74} alt="Host avatar" />
+                    <div className={`${currentOffer.host.is_pro ? `property__avatar-wrapper--pro` : ``} property__avatar-wrapper user__avatar-wrapper`}>
+                      <img className="property__avatar user__avatar" src={currentOffer.host.avatar_url} width={74} height={74} alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
-                      Angelina
+                      {currentOffer.host.name}
                     </span>
                   </div>
                   <div className="property__description">
                     <p className="property__text">
-                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                    </p>
-                    <p className="property__text">
-                      An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                      {currentOffer.description}
                     </p>
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <h2 className="reviews__title">Reviews · <span className="reviews__amount">1</span></h2>
-                  <ul className="reviews__list">
-                    <li className="reviews__item">
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width={54} height={54} alt="Reviews avatar" />
-                        </div>
-                        <span className="reviews__user-name">
-                          Max
-                        </span>
-                      </div>
-                      <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{width: `80%`}} />
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
-                        <p className="reviews__text">
-                          A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                        </p>
-                        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                      </div>
-                    </li>
-                  </ul>
+                  {comments ? <ReviewsList comments={comments} /> : `` }
                   <FeedbackForm />
                 </section>
               </div>

@@ -45,7 +45,7 @@ const Map = ({city, points}) => {
   }, []);
 
   return (
-    <section id="map" className="cities__map map" style={{height: `500px`}} ref={mapRef} />
+    <section id="map" className="cities__map map" style={{height: `100%`}} ref={mapRef} />
   );
 };
 

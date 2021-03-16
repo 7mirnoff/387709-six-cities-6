@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {PropsValidator} from '../../utils';
 
+import StarsRating from '../stars-rating/stars-rating';
+
 const PlaceCard = ({
   id,
   title,
@@ -11,12 +13,12 @@ const PlaceCard = ({
   isFavorite
 }) => {
 
-  const StarsRating = () => {
-    const style = {
-      width: `${Math.min(Math.round(rating) * 100 / 5, 100)}%`
-    };
-    return <span style={style} />;
-  };
+  // const StarsRating = (rating) => {
+  //   const style = {
+  //     width: `${Math.min(Math.round(rating) * 100 / 5, 100)}%`
+  //   };
+  //   return <span style={style} />;
+  // };
 
   return (
     <>
@@ -34,7 +36,7 @@ const PlaceCard = ({
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <StarsRating />
+          <StarsRating rating={rating} />
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
