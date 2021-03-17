@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from '../../header/header';
 
 import ReviewsList from '../../reviews-list/reviews-list';
@@ -12,7 +13,7 @@ import LoadingScreen from '../../loading-screen/loading-screen';
 
 import StarsRating from '../../stars-rating/stars-rating';
 
-import {PropsValidator, APIRouteMethods} from '../../../utils';
+import {PropsValidator, APIRouteMethods, AuthorizationStatus} from '../../../utils';
 
 import {createAPI} from "../../../services/api";
 
@@ -25,7 +26,8 @@ const fetchCommentsList = (id) => {
   return api.get(APIRouteMethods.getHotelComments(id));
 };
 
-const RoomScreen = ({hotels}) => {
+const RoomScreen = ({hotels, authorizationStatus}) => {
+  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
   const id = +useParams().id;
 
   const [isLoading, setLoading] = useState(true);
@@ -137,7 +139,7 @@ const RoomScreen = ({hotels}) => {
                 </div>
                 <section className="property__reviews reviews">
                   {comments ? <ReviewsList comments={comments} /> : `` }
-                  <FeedbackForm />
+                  {isAuth ? <FeedbackForm /> : ``}
                 </section>
               </div>
             </div>
@@ -169,12 +171,14 @@ const RoomScreen = ({hotels}) => {
 };
 
 RoomScreen.propTypes = {
-  hotels: PropsValidator.HOTELS
+  hotels: PropsValidator.HOTELS,
+  authorizationStatus: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => {
   return {
-    hotels: state.cities.offers
+    hotels: state.cities.offers,
+    authorizationStatus: state.authorization.authorizationStatus
   };
 };
 
