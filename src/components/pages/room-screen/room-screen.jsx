@@ -8,6 +8,9 @@ import ReviewsList from '../../reviews-list/reviews-list';
 import FeedbackForm from '../../feedback-form/feedback-form';
 import PlaceOther from '../../place-other/place-other';
 
+import MapWrapper from '../../map-wrapper/map-wrapper';
+import NearbyMap from '../../nearby-map/nearby-map';
+
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import LoadingScreen from '../../loading-screen/loading-screen';
 
@@ -143,7 +146,13 @@ const RoomScreen = ({hotels, authorizationStatus}) => {
                 </section>
               </div>
             </div>
-            <section className="property__map map" />
+            <MapWrapper
+              city={nearby[0].city.location}
+              points={nearby}
+              render={(ref) => {
+                return (<NearbyMap mapRef={ref} />);
+              }}
+            />
           </section>
           <div className="container">
             <section className="near-places places">

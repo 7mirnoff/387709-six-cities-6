@@ -1,12 +1,14 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import Header from '../../header/header';
 import CitiesList from '../../cities-list/cities-list';
 import PlacesList from '../../places-list/places-list';
-import Map from '../../map/map';
+import MapWrapper from '../../map-wrapper/map-wrapper';
+import MainMap from '../../main-map/main-map';
 
-import {city, points} from '../../../mocs/map';
+import {PropsValidator} from '../../../utils';
 
-const CitiesScreen = () => {
+const CitiesScreen = ({hotels}) => {
   return (
     <>
       <div style={{display: `none`}}>
@@ -23,9 +25,12 @@ const CitiesScreen = () => {
             <div className="cities__places-container container">
               <PlacesList />
               <div className="cities__right-section">
-                <Map
-                  city={city}
-                  points={points}
+                <MapWrapper
+                  city={hotels[0].city.location}
+                  points={hotels}
+                  render={(ref) => {
+                    return (<MainMap mapRef={ref} />);
+                  }}
                 />
               </div>
             </div>
@@ -36,4 +41,14 @@ const CitiesScreen = () => {
   );
 };
 
-export default CitiesScreen;
+CitiesScreen.propTypes = {
+  hotels: PropsValidator.HOTELS
+};
+
+const mapStateToProps = (state) => {
+  return {
+    hotels: state.cities.offers
+  };
+};
+
+export default connect(mapStateToProps, null)(CitiesScreen);

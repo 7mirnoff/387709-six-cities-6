@@ -1,17 +1,19 @@
-import React, {useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const Map = ({city, points}) => {
+import {PropsValidator} from '../../utils';
+
+const MapWrapper = ({city, points, render}) => {
   const mapRef = useRef();
 
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
       center: {
-        lat: city.lat,
-        lng: city.lng
+        lat: city.latitude,
+        lng: city.longitude
       },
       zoom: city.zoom
     });
@@ -29,8 +31,8 @@ const Map = ({city, points}) => {
       });
 
       leaflet.marker({
-        lat: point.lat,
-        lng: point.lng
+        lat: point.location.latitude,
+        lng: point.location.longitude
       },
       {
         icon: customIcon
@@ -45,21 +47,17 @@ const Map = ({city, points}) => {
   }, []);
 
   return (
-    <section id="map" className="cities__map map" style={{height: `100%`}} ref={mapRef} />
+    render(mapRef)
   );
 };
 
-Map.propTypes = {
+MapWrapper.propTypes = {
   city: PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired,
   }),
-  points: PropTypes.arrayOf(PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-  }))
+  points: PropsValidator.HOTELS
 };
 
-export default Map;
+export default MapWrapper;
